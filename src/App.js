@@ -65,26 +65,28 @@ const CATEGORIES = [
 ]
 
 function NewFactForm({ setFacts, setShowForm }) {
+	// Stany dla formularza
 	const [text, setText] = useState('')
 	const [source, setSource] = useState('')
 	const [category, setCategory] = useState('')
 	const textLength = text.length
 
+	//  Funkcja, która się wykonuje po kliknięciu przycisku "Post"
 	async function handleSubmit(e) {
-		// 1. Prevent browser reload
+		// 1. Zapobiega przeładowaniu strony
 		e.preventDefault()
 
-		// 2. Check if the data is valid. If so,create a new fact
+		// 2.  Sprawdza, czy wszystkie pola są wypełnione i tekst nie jest za długi
 		if (text && source && category && textLength <= 200) {
-			// 3. Upload fact to supabase and receive the new fact object
+			// 3. Dodaje nową ciekawostkę do bazy danych
 			const { data: newFact } = await supabase.from('facts').insert([{ text, source, category }]).select()
-			// 4. Add a new fact to UI: add the fact to state
+			// 4. Dodaje nową ciekawostkę do listy ciekawostek
 			setFacts(facts => [newFact[0], ...facts])
-			// 5. Reset the input fields back to being empty
+			// 5. Czyści pola formularza
 			setText('')
 			setSource('')
 			setCategory('')
-			// 6. Close the form
+			// 6. Zamykamy formularz
 			setShowForm(false)
 		}
 	}
