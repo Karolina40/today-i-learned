@@ -64,16 +64,6 @@ const CATEGORIES = [
 	{ name: 'news', color: '#8b5cf6' },
 ]
 
-function isValidHttpUrl(string) {
-	let url
-	try {
-		url = new URL(string)
-	} catch (_) {
-		return false
-	}
-	return url.protocol === 'http:' || url.protocol === 'https:'
-}
-
 function NewFactForm({ setFacts, setShowForm }) {
 	const [text, setText] = useState('')
 	const [source, setSource] = useState('')
@@ -85,7 +75,7 @@ function NewFactForm({ setFacts, setShowForm }) {
 		e.preventDefault()
 
 		// 2. Check if the data is valid. If so,create a new fact
-		if (text && isValidHttpUrl(source) && category && textLength <= 200) {
+		if (text && source && category && textLength <= 200) {
 			// 3. Create a new fact object
 			// const newFact = {
 			// 	id: Math.round(Math.random() * 10000000),
