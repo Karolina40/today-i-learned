@@ -9,14 +9,14 @@ function App() {
 
 	useEffect(
 		function () {
-			// this function will only run at the begining only when the application first loads
+			// funkcja, która pobiera ciekawostki z bazy danych
 			async function getFacts() {
-				// store in query fact table from supabase and all columns from the table
+				// tworzenie zapytania do bazy danych: pobranie wszystkich ciekawostek z bazy danych
 				let query = supabase.from('facts').select('*')
-
+				// Jeśli kategoria nie jest "all" pobiera ciekawostki tylko z wybranej kategorii
 				if (currentCategory !== 'all') query = query.eq('category', currentCategory)
 
-				// Data fetching
+				// Wysłanie zapytania i ustawienie wyniku
 				const { data: facts } = await query
 				setFacts(facts)
 			}
