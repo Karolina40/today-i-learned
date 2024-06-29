@@ -76,18 +76,6 @@ function NewFactForm({ setFacts, setShowForm }) {
 
 		// 2. Check if the data is valid. If so,create a new fact
 		if (text && source && category && textLength <= 200) {
-			// 3. Create a new fact object
-			// const newFact = {
-			// 	id: Math.round(Math.random() * 10000000),
-			// 	text,
-			// 	source,
-			// 	category,
-			// 	votesInteresting: 0,
-			// 	votesMindblowing: 0,
-			// 	votesFalse: 0,
-			// 	createdIn: new Date().getFullYear(),
-			// }
-
 			// 3. Upload fact to supabase and receive the new fact object
 			const { data: newFact } = await supabase.from('facts').insert([{ text, source, category }]).select()
 			// 4. Add a new fact to UI: add the fact to state
