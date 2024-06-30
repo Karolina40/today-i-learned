@@ -3,6 +3,8 @@ import supabase from './supabase'
 import './style.css'
 
 function App() {
+	const apiUrl = process.env.REACT_APP_API_URL
+	const apiKey = process.env.REACT_APP_API_KEY
 	const [showForm, setShowForm] = useState(false)
 	const [facts, setFacts] = useState([])
 	const [currentCategory, setCurrentCategory] = useState('all')
